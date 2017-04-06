@@ -1,2 +1,2 @@
 # OpenSCAD
-Utilidades para mis desarrollos de OpenSCAD
+Utilidades, ejemplos y librerias usadas en mis desarrollos de OpenSCAD
