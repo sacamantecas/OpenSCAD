@@ -9,11 +9,12 @@
 //
 
 
-// corte_a_capa(n [por_exceso]) ajusta una altura a nº entero de capas (se espera que el llamador haya asignado valor a $alto_de_capa)
+// corte_a_capa(n, [por_exceso]) ajusta una altura a nº entero de capas (se espera que el llamador haya asignado valor a $alto_de_capa)
 function corte_a_capa(cuanto, exceso=false) = floor((cuanto+(exceso?($alto_de_capa-.0001):0))/$alto_de_capa)*$alto_de_capa;
 // correccion() sirve para remarcar el código donde se hace una corrección sobre un valor teórico para que la pieza salga perfecta en la práctica
 function correccion( valor )=valor; 
-function fn(d) = floor(( d/$fs*3.1416+3)/4)*4 ; // numero de facetas segun el diametro, ajustado a multiplo de 4
+// numero de facetas segun el diametro, ajustado a multiplo de 4 para casar figuras ortogonales
+function fn(d) = floor(( d/$fs*3.1416+3)/4)*4 ; 
 
 
 
