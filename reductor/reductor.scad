@@ -71,7 +71,7 @@ coger_hecho = 1 ;
 			rotate([fabricar ? 0 : 180,0,0]) 
 				render() 
 					carcasa(nivel=2, $alto_de_capa = .4);
-}
+	}
 
 
 
