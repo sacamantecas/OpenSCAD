@@ -66,24 +66,41 @@ module afeita(cuanto=.25) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // agujero para meter una rosca de embutir dándole un calentón con el soldador
-// ejemplo:
-//		difference() { cube([30, 20, 20]); translate([15, 0, 10]) rotate([-90,0,0]) rosca_embutir(soportada=1); translate([15, 10,20]) rotate([180,0,0]) rosca_embutir(8) ;}
-module rosca_embutir(profundidad=5, soportada=0) {
+// el soporte por defecto no se pone, y si se pone es para agujero horizontal por defecto
+// ejemplo:	$fa=1;$fs=1;$alto_de_capa=.3; difference() { %cube([30, 20, 20]); translate([15, 0, 10]) rotate([-90,0,0]) rosca_embutir(soportada=1); translate([15, 10,20]) rotate([180,0,0]) rosca_embutir(8) ; translate([15, 0, 0]) rosca_embutir(soportada=1, soporte_axial=1); }
+module rosca_embutir(profundidad=5, soportada=0, soporte_axial=0) {
+	H = 4 ;	
+	Dg = [5.6, 5.2];
+	Dp = 3.4;
+	ancho_churrito = .5;
+	$fn=12;
+
+	if ($alto_de_capa == undef) echo("$alto_de_capa SIN DEFINIR, ESTO NO PUEDE SALIR BIEN")	;
+	
 	difference() {
 		union() {
-			H = 4 ;	
-			translate([0,0,(H-mp)/2]) cylinder(d1=5.6, d2=5.2, h=H+mp, center=true, $fn=12);
-			translate([0,0,profundidad/2]) cylinder(d=3.4, h=profundidad, center=true, $fn=12);
+			translate([0,0,(H-mp)/2]) cylinder(d1=Dg[0], d2=Dg[1], h=H+mp, center=true);
+			translate([0,0,profundidad/2]) cylinder(d=Dp, h=profundidad, center=true);
 		}
 		if (soportada) {
-			escala = (5.6 - 2 * $gap_v_soporte) / 5.6 ;
-			translate([0,0,-$gap_h_soporte/2])
-				intersection() {
-					scale([escala, escala, 1])
-						rosca_embutir(profundidad=0, soportada=0);
-					translate([0,0,profundidad/2])
-						cube([5.6 * cos($angulo_voladizo), 6, profundidad], center=true);
-				}
+			if (soporte_axial)
+				translate([0, 0, -mp])				
+					difference() {
+						cylinder(d=Dp + 2 * ancho_churrito, h=H - $alto_de_capa + mp);
+						translate([0, 0, -mp])
+							cylinder(d = Dp, h=H - $alto_de_capa + 3*mp);
+					}
+			else {
+				escala = (Dg[0] - 2 * $alto_de_capa) / Dg[0] ;
+				angulo_voladizo = 50 ; // para estos tamaños se puede usar hasta 60º 
+				translate([0,0,-1.5]) // un hueco horizontal de 1.5 está bien
+					intersection() {
+						scale([escala, escala, 1])
+							rosca_embutir(profundidad=0, soportada=0);
+						translate([0,0,profundidad/2])
+							cube([Dg[0] * cos(angulo_voladizo), 6, profundidad], center=true);
+					}
+			}
 		}
 	}
 }
