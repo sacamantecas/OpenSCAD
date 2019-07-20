@@ -32,7 +32,7 @@ $angulo_voladizo = 50 ; // 45 es un nº más redondo, pero el PLA aguanta mayor 
 
 // variables que no uso con $ porque de momento no me ha interesado exportarlas (necesarias internamente pero intrascendentes cara al exterior)
 alto_suela = $alto_de_capa ;
-tabla_ancho = 2 * $espesor_defecto ;
+tabla_ancho = 6 * $espesor_defecto ; // esta medida determina cómo es el entablillado de base del sombrero
 tabla_separa = .1 ;
 mp = .1 ; // muy poco (epsilon)
 refuerzo_separacion=mp/10 ; // es para forzar la separación de sombrero y parrilla (kisslicer lo agradece)
