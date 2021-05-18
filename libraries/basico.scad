@@ -2,7 +2,7 @@
 //
 // utilidades y variables básicas que suelo usar
 // It is licensed under the Creative Commons - GNU LGPL 2.1 license.
-// © 2014-2017 by luiso gutierrez (sacamantecas)
+// © 2014-2017 by luis gutierrez (sacamantecas)
 //
 // cada módulo tiene su ejemplo simple correspondiente
 // se recomienda ver qué parámetros tiene y experimentar con ellos
@@ -92,15 +92,41 @@ module rosca_embutir(profundidad=5, soportada=0, soporte_axial=0) {
 					}
 			else {
 				escala = (Dg[0] - 2 * $alto_de_capa) / Dg[0] ;
-				angulo_voladizo = 50 ; // para estos tamaños se puede usar hasta 60º 
-				translate([0,0,-1.5]) // un hueco horizontal de 1.5 está bien
+				angulo_voladizo = 60 ; // para estos tamaños se puede usar hasta 60º y lo uso para afinar el soporte, que es dificil de sacar
+				translate([0,0,-1.5*0]) // un hueco horizontal de 1.5 está bien
 					intersection() {
-						scale([escala, escala, 1])
-							rosca_embutir(profundidad=0, soportada=0);
+                  difference() {
+                     scale([escala, escala, 1])
+                        rosca_embutir(profundidad=0, soportada=0);
+                     // divido el soporte por la mitad, poque no hay quien lo saque de otra manera
+                     translate([0,0,profundidad/2-mp])                        
+                        cube([.8,Dg[0],profundidad+mp],center=true);
+                  }
 						translate([0,0,profundidad/2])
 							cube([Dg[0] * cos(angulo_voladizo), 6, profundidad], center=true);
 					}
 			}
 		}
 	}
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// agujero para un tornillo M3 de <largo>mm. Tras ese largo va una tuerca, y previo a ese largo hay un hueco cilíndrico para la cabeza
+// si la cabeza es cónica, el cono va a partir del origen
+// ejemplo:	difference() { cube(20); translate([10, 1, 8]) rotate([-80,0]) tornillo_M3(16); }
+module tornillo_M3(largo, conico=true) {
+	cabeza_d = 6.7;
+	cuerpo_d = 3.6;
+	tuerca_d = 6/cos(30);
+	tuerca_h = 3;
+	tuerca_holgada = tuerca_h * 3;
+	holganza_cabeza = 8;
+	
+	translate([0, 0, -holganza_cabeza]) cylinder(d=cabeza_d, h= holganza_cabeza + mp/10);
+	if (conico) cylinder(d1=cabeza_d, d2=0, h=cabeza_d/2);
+	cylinder(d=cuerpo_d, h=largo + mp/10);
+	translate([0, 0, largo]) 
+		cylinder(d=tuerca_d, h=tuerca_holgada, $fn=6);
 }

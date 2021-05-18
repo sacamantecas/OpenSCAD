@@ -3,7 +3,7 @@
 // implementaciones del cubo y el cilindro para hacer más compacto el código
 // (lo mantengo por no modificar fuentes viejos, pero no recomiendo su uso)
 // It is licensed under the Creative Commons - GNU LGPL 2.1 license.
-// © 2014-2017 by luiso gutierrez (sacamantecas)
+// © 2014-2017 by luis gutierrez (sacamantecas)
 //
 // cada función tiene su ejemplo simple correspondiente
 // se recomienda ver qué parámetros tiene y experimentar con ellos

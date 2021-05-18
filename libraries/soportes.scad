@@ -2,14 +2,14 @@
 //
 // rutinas para hacer soportes
 // It is licensed under the Creative Commons - GNU LGPL 2.1 license.
-// ¬© 2014-2017 by luiso gutierrez (sacamantecas)
+// © 2014-2017 by luis gutierrez (sacamantecas)
 //
-// cada m√≥dulo tiene su ejemplo simple correspondiente
-// se recomienda ver qu√© par√°metros tiene y experimentar con ellos
+// cada mÛdulo tiene su ejemplo simple correspondiente
+// se recomienda ver quÈ par·metros tiene y experimentar con ellos
 //
 
 
-// un truco para interrogar desde fuera variables de configuraci√≥n internas de este m√≥dulo
+// un truco para interrogar desde fuera variables de configuraciÛn internas de este mÛdulo
 // ejemplo:
 //		angulo = soportes($angulo_voladizo);
 function soportes(valor) = valor; 
@@ -18,29 +18,29 @@ function soportes(valor) = valor;
 if ($alto_de_capa==undef) 
 	echo("\n\nERROR: $alto_de_capa esta indefinido\n\n");
 
-// Variables que se usan aqu√≠, y puede interesar importar desde otro m√≥dulo. Para hacerlo se usa la funci√≥n utilidades()
+// Variables que se usan aquÌ, y puede interesar importar desde otro mÛdulo. Para hacerlo se usa la funciÛn utilidades()
 // Por ejemplo, para importar desde otro modulo $angulo_voladizo haremos:
 //	angulo = utilidades($angulo_voladizo);
 
-// $espesor=.65 ; // espesor de los tabiques de soporte (si no se especifica en el m√≥dulo llamador, se usa $espesor_defecto)
-$espesor_defecto = .6 ; // es el espesor que se usar√° si no hay una variable $espesor declarada en el m√≥dulo principal ni se indica en la llamada 
-$gro_pla_sop = 1 ; // grosor de las plataformas de soporte (con <1mm son fr√°giles y se rompen quedando pegadas al lado superior)
-$gap_v_soporte = $alto_de_capa + .05 ; // separaci√≥n entre las plataformas de soporte y lo soportado
-$gap_h_soporte = 2 ; // separaci√≥n horizontal de las plataformas de soporte
-$angulo_voladizo = 50 ; // 45 es un n¬∫ m√°s redondo, pero el PLA aguanta mayor √°ngulo
+// $espesor=.65 ; // espesor de los tabiques de soporte (si no se especifica en el mÛdulo llamador, se usa $espesor_defecto)
+$espesor_defecto = .6 ; // es el espesor que se usar· si no hay una variable $espesor declarada en el mÛdulo principal ni se indica en la llamada 
+$gro_pla_sop = 1 ; // grosor de las plataformas de soporte (con <1mm son fr·giles y se rompen quedando pegadas al lado superior)
+$gap_v_soporte = $alto_de_capa + .05 ; // separaciÛn entre las plataformas de soporte y lo soportado
+$gap_h_soporte = 2 ; // separaciÛn horizontal de las plataformas de soporte
+$angulo_voladizo = 50 ; // 45 es un n∫ m·s redondo, pero el PLA aguanta mayor ·ngulo
 
 
 // variables que no uso con $ porque de momento no me ha interesado exportarlas (necesarias internamente pero intrascendentes cara al exterior)
 alto_suela = $alto_de_capa ;
-tabla_ancho = 6 * $espesor_defecto ; // esta medida determina c√≥mo es el entablillado de base del sombrero
+tabla_ancho = 6 * $espesor_defecto ; // esta medida determina cÛmo es el entablillado de base del sombrero
 tabla_separa = .1 ;
 mp = .1 ; // muy poco (epsilon)
-refuerzo_separacion=mp/10 ; // es para forzar la separaci√≥n de sombrero y parrilla (kisslicer lo agradece)
+refuerzo_separacion=mp/10 ; // es para forzar la separaciÛn de sombrero y parrilla (kisslicer lo agradece)
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// c√≥digo para probar espesores: la idea es ver qu√© espesor es el mejor tratado por el fileteador (no hace falta llegar a imprimir)
+// cÛdigo para probar espesores: la idea es ver quÈ espesor es el mejor tratado por el fileteador (no hace falta llegar a imprimir)
 *	for (i=[.45:.025:.78]) {
 		a=[0,0,(i-.45)*1000];
 		rotate(a)
@@ -55,16 +55,16 @@ refuerzo_separacion=mp/10 ; // es para forzar la separaci√≥n de sombrero y parri
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // agujero_cilindrico_soportado: lo que hay que restar a una pieza para lograr un agujero cilindrico con soporte para la parte de arriba
 // - cascara es para dejar hacer el soporte cerrado por ambos lados
-// - anticolapso es parecido, pero s√≥lo por un lado
-// - separa es para que el soporte empiece un poco dentro (unas d√©cimas) agrandar la parte de agujero por fuera...
+// - anticolapso es parecido, pero sÛlo por un lado
+// - separa es para que el soporte empiece un poco dentro (unas dÈcimas) agrandar la parte de agujero por fuera...
 // ejemplo: 
 //		difference() {cube([30, 30, 40], center=true); agujero_cilindrico_soportado(20, 30, r=[90,0,0]); }
 module agujero_cilindrico_soportado(d, h, t, r, cascara=0, separa=0, anticolapso) { 
-	// el sistema anticolapso evita que las paredes paralelas del soporte se caigan, haciendo una U en vez de dos I	(si es >h, el soporte ser√° macizo)
+	// el sistema anticolapso evita que las paredes paralelas del soporte se caigan, haciendo una U en vez de dos I	(si es >h, el soporte ser· macizo)
 	espesor=($espesor==undef?$espesor_defecto:$espesor);
 	ac = (anticolapso==undef?espesor:anticolapso);
-	// RECORDAR SIEMPRE QUE ESTO ES LO QUE SE RESTA PARA CREAR UN AGUJERO CILINDRICO QUE SE VOLCAR√Å HACIA LA HORIZONTAL
-	// una vez fabricada la pieza, los soportes salen a trocitos y hay que refinar especialmente por abajo, pero se somete a mucho menos estr√©s a la pieza
+	// RECORDAR SIEMPRE QUE ESTO ES LO QUE SE RESTA PARA CREAR UN AGUJERO CILINDRICO QUE SE VOLCAR¡ HACIA LA HORIZONTAL
+	// una vez fabricada la pieza, los soportes salen a trocitos y hay que refinar especialmente por abajo, pero se somete a mucho menos estrÈs a la pieza
 	reduccion=d*cos($angulo_voladizo);
 
 	translate(t)
@@ -79,7 +79,7 @@ module agujero_cilindrico_soportado(d, h, t, r, cascara=0, separa=0, anticolapso
 					if (abs(ac)<h) 
 						intersection() {
 							cube([(reduccion-2*espesor), d, h-2*cascara-separa+mp], center=true);
-							// un voladizo de 45¬∫ lo puedo hacer con un cubo inclinado, y me ahorro hacer 2 cubos en $angulo_voladizo, o buscar el √°ngulo achatando
+							// un voladizo de 45∫ lo puedo hacer con un cubo inclinado, y me ahorro hacer 2 cubos en $angulo_voladizo, o buscar el ·ngulo achatando
 							translate([0,d/2-$gro_pla_sop-d*cos(45),ac])
 								rotate([0,0,45])
 									cube([d,d,h+(ac?0:mp)], center=true);
@@ -91,18 +91,18 @@ module agujero_cilindrico_soportado(d, h, t, r, cascara=0, separa=0, anticolapso
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // soporte con forma de paralelepipedo
-// - hueco: separaci√≥n deseable entre tabiques
+// - hueco: separaciÛn deseable entre tabiques
 // - sombrero: tapa superior del soporte
 // - cascara: un envoltorio
 // - suela: base para que se pegue bien a la cama (importante en soportes muy altos que pueden despegarse y caer)
 // ejemplo:
 //		soporte_paralelo([30, 20, 10]);
 module soporte_paralelo(cubo, hueco=3, center=true, sombrero=true, cascara=false, suela=false) {	
-	espesor=($espesor==undef?$espesor_defecto:$espesor);
+	espesor=(is_undef($espesor)?$espesor_defecto:$espesor);
 	numhuecos = floor((cubo[0] + (hueco * .9 + espesor))/ (hueco+espesor));
 	tamhueco = (cubo[0] - (numhuecos + 1) * espesor) / numhuecos;
 	alto_reducido = cubo[2] - (sombrero?$gro_pla_sop+refuerzo_separacion:0);
-	
+
 	translate(center ? -cubo/2 : [0,0,0])
 		if (suela)	{
 			cube([cubo[0], cubo[1], alto_suela], center=false);
@@ -155,7 +155,7 @@ module soporte_circular(r, h, hueco=3, center=true, sombrero=true) {
 	cilindros=ceil((r- hueco/2 + hueco*.9)/(hueco+espesor));
 	gap=r/(cilindros+1);
 	alto_reducido=h - (sombrero?$gro_pla_sop+refuerzo_separacion:0);
-	faceta= $fs*2 ; // facetas doble de grandes de lo establecido como fet√©n
+	faceta= $fs*2 ; // facetas doble de grandes de lo establecido como fetÈn
 	ancho_liston = 1.6*espesor ;
 	min_separa = espesor + .1;
 
@@ -177,7 +177,7 @@ module soporte_circular(r, h, hueco=3, center=true, sombrero=true) {
 	translate([0,0,center?-h/2:0]) {	
 		translate([0,0,alto_reducido/2])
 			for (i=[0:cilindros]) {
-				difference() { // no puedo ceder a OpenSCAD el control de los c√≠rculos, porque si hace el exterior de 7 facetas y el interior de 6 queda fatal
+				difference() { // no puedo ceder a OpenSCAD el control de los cÌrculos, porque si hace el exterior de 7 facetas y el interior de 6 queda fatal
 					facetas = max(6, 2*3.14*(r-(gap*i))/faceta);
 					cylinder(r=r-(gap*i), h=alto_reducido, center=true, $fn=facetas);
 					cylinder(r=r-(gap*i)-espesor, h=alto_reducido+mp, center=true, $fn=facetas);
@@ -208,17 +208,18 @@ module soporte_circular(r, h, hueco=3, center=true, sombrero=true) {
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// estructura de soporte con una forma extra√±a
-// la idea es pedir un soporte con una forma envolvente de paralelepipedo, y pasarle como children una silueta en 2D descrita en l√≠nea o en un module independiente
+// estructura de soporte con una forma extraÒa
+// la idea es pedir un soporte con una forma envolvente de paralelepipedo, y pasarle como children una silueta en 2D descrita en lÌnea o en un module independiente
 // ejemplo:
 //		soporte_raro([20,30,10]) { resize([20,0]) circle(d=10); }	
 module soporte_raro(cubo, center=false) {
 	// rutina de hacer soportes con forma rara: una silueta extruida a lo largo del eje Y
-	// Se espera un children que dibuje la silueta 2D ¬°¬°CENTRADA!! en el plano XY
-	// el cubo que se pasa como par√°metro son las medidas del tarugo final: el X del children, la longitud de extrusi√≥n en Y, y el Z, que es el Y del children
+	// Se espera un children que dibuje la silueta 2D °°CENTRADA!! en el plano XY
+	// el cubo que se pasa como par·metro son las medidas del tarugo final: el X del children, la longitud de extrusiÛn en Y, y el Z, que es el Y del children
 	module shape() { translate([0,cubo[1]/2,0]) rotate([90,0,0]) linear_extrude(cubo[1]) children(0); }
 	
-	tejado=corte_a_capa(.8);
+	tejado=floor((.8/$alto_de_capa)*$alto_de_capa);
+
 	translate(center?[0,0,0]:cubo/2)
 		union() {
 			difference() {

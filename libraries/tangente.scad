@@ -2,10 +2,10 @@
 //
 // rutinas de ayuda para hacer tangentes a una elipse
 // It is licensed under the Creative Commons - GNU LGPL 2.1 license.
-// ¬© 2014-2019 by luiso gutierrez (sacamantecas)
+// © 2014-2019 by luis gutierrez (sacamantecas)
 //
-// cada m√≥dulo tiene su ejemplo simple correspondiente
-// se recomienda ver qu√© par√°metros tiene y experimentar con ellos
+// cada mÛdulo tiene su ejemplo simple correspondiente
+// se recomienda ver quÈ par·metros tiene y experimentar con ellos
 //
 
 
@@ -14,7 +14,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-// hacer un tarugo tangente a una elipse con un √°ngulo dado ////////////////////////////////////////////////////////////
+// hacer un tarugo tangente a una elipse con un ·ngulo dado ////////////////////////////////////////////////////////////
 * color() {
 	/* planteamiento formal:
 		- sea una elipse proyectada en el eje Z, con semiejes semieje_a y semieje_b y altura alto
@@ -39,7 +39,7 @@
 	X = sqrt(1/(pow(semieje_b*tan(angulo)/pow(semieje_a,2),2)+1/pow(semieje_a,2))) ;
 	// trasladar al punto de contacto
 	translate([X, semieje_b*sqrt(1-pow(X/semieje_a,2)), 0])
-		// rotar el √°ngulo de tangencia
+		// rotar el ·ngulo de tangencia
 		rotate([0, 0, angulo]) 
 			// colocar en [0, 0, 0] el punto que debe tocar la elipse
 			translate([ancho/2, 0, 0]) 
@@ -50,10 +50,10 @@
 // rematar una esquina no ortogonal con una elipse /////////////////////////////////////////////////////////////////////
 * color() {
 	/* planteamiento formal:
-		- sea un tarugo de ancho * largo, con un corte que forma con la vertical un √°ngulo preestablecido
+		- sea un tarugo de ancho * largo, con un corte que forma con la vertical un ·ngulo preestablecido
 		  si lo vemos desde arriba (Ctrl+4 con OpenSCAD) veremos que el lado izquierdo del tarugo mide "largo",
-		  y el lado izquierdo mide "h" (a calcular en funci√≥n del √°ngulo)
-		- queremos suavizar el √°ngulo derecho con un √≥valo de anchura arbitraria y con un grado de estiramiento 
+		  y el lado izquierdo mide "h" (a calcular en funciÛn del ·ngulo)
+		- queremos suavizar el ·ngulo derecho con un Ûvalo de anchura arbitraria y con un grado de estiramiento 
 		  tal que sea tangente al corte citado
 	*/
 
@@ -63,10 +63,10 @@
 	largo = 40 ;
 	angulo = 62 ;
 		
-	a = ancho/3 ; // semieje horizontal del √≥valo de redondeo (este valor es arbitrario)
-	h = largo-ancho/tan(angulo); // este valor es conocido o f√°cilmente calculable
+	a = ancho/3 ; // semieje horizontal del Ûvalo de redondeo (este valor es arbitrario)
+	h = largo-ancho/tan(angulo); // este valor es conocido o f·cilmente calculable
 
-	// c√°lculos: X e Y son las coordenadas de contacto, y B el semieje vertical del √≥valo
+	// c·lculos: X e Y son las coordenadas de contacto, y B el semieje vertical del Ûvalo
 	X = pow(a,2)/(a+h*tan(angulo));
 	B = pow(a,2)*sqrt(1-pow(X/a,2)) / (X * tan(angulo));
 	Y = B * sqrt(1 - pow(X/a, 2));
@@ -113,7 +113,7 @@
 
 	$fs = .02 ; $fa = .02 ;
 	
-	// uso aditivo de la ladera, volte√°ndola para darle la orientaci√≥n requerida
+	// uso aditivo de la ladera, volte·ndola para darle la orientaciÛn requerida
 	translate([-(largo+transicion)/4, -desviacion/2]) 
 		cube([(largo-transicion)/2, ancho, alto], center=true);
 	translate([0,-ancho/2,0])	
@@ -132,7 +132,7 @@
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// M√ìDULO PARA HACER LADERAS //////////////////////////////////////////////////////////////////////////////////////////
+/// M”DULO PARA HACER LADERAS //////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // hacer una ladera en un paralelepipedo o tarugo dado
@@ -150,17 +150,17 @@ module ladera_2D(rectangulo, inf_x=.5, inf_y=.5, suavidad=1, sobrado=false, cent
 /* planteamiento:
 	Se trata de devolver un rectangulo de dimensiones [ rectangulo[0], rectangulo[1] ]
 	recortado formando una vertiente que va de derecha a izquierda, idealmente un 
-	par de curvas c√≥ncava-convexa.
+	par de curvas cÛncava-convexa.
 	
-	El punto de inflexi√≥n se encontrar√° a inf_x * rectangulo[0] del lado izquierdo
+	El punto de inflexiÛn se encontrar· a inf_x * rectangulo[0] del lado izquierdo
 	y a inf_y * rectangulo[1] del borde posterior.
 	
-	La inflexi√≥n tendr√° un √°ngulo v con el eje Y que estar√° entre un valor m√°ximo
-	de 90¬∫ (con suavidad==0) y un valor m√≠nimo calculado por tanteo con la funci√≥n
+	La inflexiÛn tendr· un ·ngulo v con el eje Y que estar· entre un valor m·ximo
+	de 90∫ (con suavidad==0) y un valor mÌnimo calculado por tanteo con la funciÛn
 	amin() (con suavidad==1)
 	
-	Como caso particular, si el punto de inflexi√≥n es posterior-izquierda tendremos
-	una curva c√≥ncava con inicio brusco y final horizontal, y si es delantero-derecha
+	Como caso particular, si el punto de inflexiÛn es posterior-izquierda tendremos
+	una curva cÛncava con inicio brusco y final horizontal, y si es delantero-derecha
 	tendremos una curva convexa con inicio horizontal y final abrupto.
 	
 	El parametro "sobrado" se pone a true cuando vamos a usar la ladera de forma 
@@ -170,12 +170,12 @@ module ladera_2D(rectangulo, inf_x=.5, inf_y=.5, suavidad=1, sobrado=false, cent
 	function acota(v, m, M)	 =  v<m ? m : (v>M ? M : v);
 	function Ai2(tanu)  =  pow(tanu*Xi - Zi, 2) / (pow(tanu,2) - 2*Zi*tanu/Xi);	
 	function Ad2(tanu)  =  pow(tanu*Xd - Yd, 2) / (pow(tanu,2) - 2*Yd*tanu/Xd);	
-	function amin(t=45, m=0, M=90)  	// b√∫squeda recursiva del angulo minimo
+	function amin(t=45, m=0, M=90)  	// b˙squeda recursiva del angulo minimo
 		=  ( (Zi==0 || Ai2(tan(t))>0) && (Yd==0 || Ad2(tan(t))>0) ) 
 		? ( (abs(t-m)<umbral) ? t : amin((m+t)/2, m, t) ) 
 		: amin((t+M)/2, t, M);
 
-	umbral = 1 ; // determina lo exahustivo de la b√∫squeda del √°ngulo m√≠nimo
+	umbral = 1 ; // determina lo exahustivo de la b˙squeda del ·ngulo mÌnimo
 	interseccion=.5 ;
 	exceso = [1,1] * (sobrado ? interseccion : 0);
 
@@ -214,7 +214,7 @@ module ladera_2D(rectangulo, inf_x=.5, inf_y=.5, suavidad=1, sobrado=false, cent
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// M√ìDULO PARA HACER CHICANES /////////////////////////////////////////////////////////////////////////////////////////
+/// M”DULO PARA HACER CHICANES /////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // construir una chicane de un ancho dado en un tarugo
@@ -233,14 +233,14 @@ module chicane_2D(rectangulo, ancho, inf_x=.5, inf_y=.5, suavidad=1, sobrado=fal
 	function acota(v, m, M)	 =  v<m ? m : (v>M ? M : v);
 	function Ai2(tanu)  =  pow(tanu*Xi - Yi, 2) / (pow(tanu,2) - 2*Yi*tanu/Xi);	
 	function Ad2(tanu)  =  pow(tanu*Xd - Yd, 2) / (pow(tanu,2) - 2*Yd*tanu/Xd);	
-	function amin(t=45, m=0, M=90)  	// b√∫squeda recursiva del angulo minimo
+	function amin(t=45, m=0, M=90)  	// b˙squeda recursiva del angulo minimo
 		=  ( (Yi==0 || Ai2(tan(t))>0) && (Yd==0 || Ad2(tan(t))>0) ) 
 		? ( (abs(t-m)<umbral) ? t : amin((m+t)/2, m, t) ) 
 		: amin((t+M)/2, t, M);
 
 	if ($fa>.1 || $fs>.1) echo("CHICANE: EL RESULTADO PUEDE SER DESASTROSO CON $fa Y/O $fs >0.1");
 		
-	umbral = 1 ; // determina lo exahustivo de la b√∫squeda del √°ngulo m√≠nimo
+	umbral = 1 ; // determina lo exahustivo de la b˙squeda del ·ngulo mÌnimo
 
 	Xi = acota(inf_x * rectangulo[0], 0, rectangulo[0]);
 	Yi = acota(inf_y * (rectangulo[1] - ancho), 0, rectangulo[1] - ancho) ;
@@ -301,11 +301,11 @@ module chicane_2D(rectangulo, ancho, inf_x=.5, inf_y=.5, suavidad=1, sobrado=fal
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/// M√ìDULO PARA HACER TRANSICIONES /////////////////////////////////////////////////////////////////////////////////////
+/// M”DULO PARA HACER TRANSICIONES /////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// construir una transici√≥n desde (0,0) al objetivo marcado, al que debe llegar con el √°ngulo indicado.
-// el par√°metro "sobra" se puede usar para extender un poco los bordes rectos, para facilitar las uniones
+// construir una transiciÛn desde (0,0) al objetivo marcado, al que debe llegar con el ·ngulo indicado.
+// el par·metro "sobra" se puede usar para extender un poco los bordes rectos, para facilitar las uniones
 // ejemplo:
 //		transicion_2D([20, 35], angulo=36);
 
