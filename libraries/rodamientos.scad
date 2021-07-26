@@ -100,7 +100,7 @@ function roddim(m) =
    [ 6816, [80,100,10] ] ] )
    rods[search(m, rods)[0]][1];
    
-use <agujeros.scad>
+// use <agujeros.scad>
    
 
 // rodamiento expresado como nº de modelo o como array, con una merma aplicables al radio y/o a Z
