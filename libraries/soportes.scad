@@ -151,7 +151,7 @@ module soporte_paralelo(cubo, hueco=3, center=true, sombrero=true, cascara=false
 // ejemplo:
 //		soporte_circular(30, 20);
 module soporte_circular(r, h, hueco=3, center=true, sombrero=true) {	
-	espesor=($espesor==undef?$espesor_defecto:$espesor);
+	espesor=is_undef($espesor) ? $espesor_defecto : $espesor;
 	cilindros=ceil((r- hueco/2 + hueco*.9)/(hueco+espesor));
 	gap=r/(cilindros+1);
 	alto_reducido=h - (sombrero?$gro_pla_sop+refuerzo_separacion:0);
